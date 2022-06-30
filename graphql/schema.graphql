@@ -3,13 +3,33 @@ type Movie {
    title: String!
    rating: Float
    summary: String
+   description_intro: String
    language: String
    medium_cover_image: String
    genres: [String]
 }
 
+type Movies {
+   info: Info
+   results: [Movie]
+}
+
 type Query {
-   movies(limit: Int, rating: Float): [Movie]!
+   movies(page: Int): Movies!
    movie(id: Int!): Movie
    suggestions(id: Int!): [Movie]!
+}
+
+type Info {
+   # The length of the response.
+   count: Int
+
+   # The amount of pages.
+   pages: Int
+
+   # Number of the next page (if it exists)
+   next: Int
+
+   # Number of the previous page (if it exists)
+   prev: Int
 }
