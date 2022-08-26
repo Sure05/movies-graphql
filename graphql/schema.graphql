@@ -1,3 +1,20 @@
+type Query {
+   movies(page: Int): Movies!
+   movie(id: Int!): Movie
+   suggestions(id: Int!): [Movie]!
+}
+
+type Mutation {
+   login(email: String!, password: String!): Boolean!
+}
+
+type User {
+   displayName: String
+   email: String!
+   phone: String
+   image: String
+}
+
 type Movie {
    id: Int!
    title: String!
@@ -12,12 +29,6 @@ type Movie {
 type Movies {
    info: Info
    results: [Movie]
-}
-
-type Query {
-   movies(page: Int): Movies!
-   movie(id: Int!): Movie
-   suggestions(id: Int!): [Movie]!
 }
 
 type Info {
