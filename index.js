@@ -18,6 +18,6 @@ const graphQLServer = createServer({
 // Bind GraphQL Yoga to `/graphql` endpoint
 app.use('/graphql', graphQLServer)
 
-app.listen(8080, () => {
-	console.log('Running a GraphQL API server at http://192.168.31.72:4000/graphql')
+app.listen(process.env.PORT || 5000, () => {
+	console.log(`Running a GraphQL API server at http://192.168.31.72:${process.env.PORT || 5000}/graphql`)
 })
