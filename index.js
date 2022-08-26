@@ -1,16 +1,18 @@
-import {importSchema} from "graphql-import";
+import { loadSchemaSync } from '@graphql-tools/load'
+import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
+import { addResolversToSchema } from '@graphql-tools/schema';
 import resolvers from "./graphql/resolvers";
 import express from 'express'
 import { createServer } from '@graphql-yoga/node'
 
 const app = express()
-
-const typeDefs = importSchema('graphql/schema.graphql')
+const schema = loadSchemaSync('graphql/schema.graphql', { loaders: [new GraphQLFileLoader()] })
+const schemaWithResolvers = addResolversToSchema({
+	schema,
+	resolvers
+})
 const graphQLServer = createServer({
-	schema: {
-		typeDefs,
-		resolvers
-	}
+	schema: schemaWithResolvers
 })
 
 // Bind GraphQL Yoga to `/graphql` endpoint
